@@ -1,0 +1,8 @@
+docx
+os
+pynput
+shutil
+subprocess
+PySimpleGUI
+PyPDF2
+reportlab
