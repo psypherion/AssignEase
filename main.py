@@ -6,7 +6,10 @@ from PDFGen import PDFGenerator, PDFMerger, ContentReader
 from ui import PathSelector
 import os
 from OSchecker import OSChecker
+from Folders import FolderCreator
 
+folder_creator = FolderCreator()
+folder_creator.create_folders()
 os_checker = OSChecker()
 os_name = os_checker.check()
 path_selector = PathSelector()
@@ -14,18 +17,13 @@ docx_path, c_programs_path, screenshot_path = path_selector.get_paths()
 ques_text = DocxToTextConverter(docx_path)
 doc_text = ques_text.read_text_from_docx()
 text_file_directory = "data"
-if text_file_directory not in os.listdir():
-    os.mkdir(text_file_directory)
-
 text_file_path = text_file_directory+"/Questions.txt"
 text_file = ques_text.create_text_file(text_file_path=text_file_path)
 ques = QuestionMatcher(text_file_path, c_programs_path)
 answered_questions = ques.matched_questions()
 program_paths = ques.programs_paths()
-
 executables_directory = "executables"
-if executables_directory not in os.listdir():
-    os.mkdir(executables_directory)
+    
 print(program_paths)
 for i in range(0, len(program_paths)):
     print(f"\n------------------Question {i+1}------------------\n"
