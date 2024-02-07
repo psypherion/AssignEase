@@ -6,3 +6,4 @@ subprocess
 PySimpleGUI
 PyPDF2
 reportlab
+platform
