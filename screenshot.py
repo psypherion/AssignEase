@@ -17,10 +17,10 @@ class ScreenshotTaker:
         if key == keyboard.Key.print_screen:
             print("\nPrint Screen button pressed!")
 
-    def stop_listening(self, key):
-        if key == keyboard.Key.enter:
-            print("\nEnter key pressed. Now Press ctrl+c")
-            self.stop_listening_flag = True
+    def on_key_release(self, key):
+        char = getattr(key, 'char', '')  # Check if 'char' attribute is available
+        if char == 's':  # Check for the 's' key
+            print("\n's' key released. Press 'Enter' to continue...")
             return False
 
     def moving_screenshot(self):
@@ -35,12 +35,12 @@ class ScreenshotTaker:
         print("\nNew items:", new_items)
 
     def take_screenshot(self):
-        with keyboard.Listener(on_press=self.on_key_press) as listener, \
-                keyboard.Listener(on_press=self.stop_listening) as stop_listener:
-            print("\nPress the Print Screen button (or press ctrl+c to exit)...")
+        with keyboard.Listener(on_press=self.on_key_press, on_release=self.on_key_release) as listener:
+            print("\nPress the Print Screen button (or press 's' to exit)...")
             try:
                 listener.join()
-                stop_listener.join()
+                # Wait for user to press 'Enter' to continue
+                input("Press 'Enter' to continue...")
             except KeyboardInterrupt:
                 pass
         return "Screenshot taken successfully!"

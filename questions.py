@@ -51,11 +51,18 @@ class QuestionMatcher:
             programs_paths.append(os.path.join(self.programs_directory, self.c_programs[i]))
         return programs_paths
     
+    def programs_names(self):
+        programs_names = []
+        for i in range(len(self.c_programs)):
+            programs_names.append(self.c_programs[i].split(".")[0])
+        return programs_names
+    
 if __name__ == "__main__":
-    text_file_path = "Questions.txt"
+    text_file_path = "data/Questions.txt"
     programs_directory_path = "C_programs"
     
     matcher = QuestionMatcher(text_file_path, programs_directory_path)
     matched_questions = matcher.match_questions_with_programs()
     print(matcher.programs_paths())
     print(matched_questions)
+    print(matcher.programs_names())
