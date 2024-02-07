@@ -11,7 +11,7 @@ from Folders import FolderCreator
 folder_creator = FolderCreator()
 folder_creator.create_folders()
 os_checker = OSChecker()
-os_name = os_checker.check()
+os_name = os_checker.check_os()
 path_selector = PathSelector()
 docx_path, c_programs_path, screenshot_path = path_selector.get_paths()
 ques_text = DocxToTextConverter(docx_path)
