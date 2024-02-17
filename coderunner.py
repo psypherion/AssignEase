@@ -15,7 +15,7 @@ class CProgramCompiler:
         process.communicate()
 
         if process.returncode == 0:
-            print("\nCompilation successful.\n\n\n")
+            print("\nCompilation successful.\n")
             if self.os == "win":
                 subprocess.call([f"{executable}.exe"])
             elif self.os == "lin":

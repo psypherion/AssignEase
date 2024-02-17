@@ -23,15 +23,11 @@ ques = QuestionMatcher(text_file_path, c_programs_path)
 answered_questions = ques.matched_questions()
 program_paths = ques.programs_paths()
 executables_directory = "executables"
-    
-print(program_paths)
+
 for i in range(0, len(program_paths)):
     print(f"\n------------------Question {i+1}------------------\n"
             f"{answered_questions[i]}\n"
-            f"------------------Answer------------------\n"
-            f"Currently running Program: {program_paths[i]}\n"
-            f"------------------XXX------------------\n")
-    print("Press ctrl+c to stop the program\n")
+            f"------------------Answer------------------\n")
     compiler = CProgramCompiler(program_path=f"{program_paths[i]}", 
                                 executables_directory=executables_directory,
                                 os=os_name)
@@ -47,7 +43,8 @@ for i in range(0, len(program_paths)):
     current_program_name = ques.programs_names()[i]
     pdf_generator = PDFGenerator(
         file_name=f"{current_program_name}",
-        content_path=f"{i} : {answered_questions[i]}\n{program_paths[i]}\n",
+        content_path=f"{program_paths[i]}",
+        text = f"{answered_questions[i]}\n\n",
         content_reader=ContentReader,
         image_path=f"temp/{current_program_name}.jpg"
     )

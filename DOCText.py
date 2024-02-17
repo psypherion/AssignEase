@@ -1,4 +1,3 @@
-import os
 from docx import Document
 
 class DocxToTextConverter:

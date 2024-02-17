@@ -7,28 +7,30 @@ from reportlab.lib.utils import ImageReader
 
 class ContentReader:
     @staticmethod
-    def read_c_file(file_path):
+    def read_c_file(file_path, text):
         try:
             with open(file_path, 'r') as file:
                 content = file.read()
-                return content
+                pdf_content = f"{text}\n{content}"
+                return pdf_content
         except FileNotFoundError:
             print(f"File '{file_path}' not found.")
             return None
 
 class PDFGenerator:
-    def __init__(self, file_name, content_reader, content_path, image_path=None):
+    def __init__(self, file_name, content_reader,text, content_path, image_path=None):
         self.file_name = file_name
         self.content_reader = content_reader
         self.content_path = content_path
         self.image_path = image_path
         self.pdf_path = f"pdf_files/{file_name}.pdf"
+        self.text = text
 
     def create_pdf(self):
-        text_content = self.content_reader.read_c_file(self.content_path)
+        text_content = self.content_reader.read_c_file(self.content_path, self.text)
         if text_content is not None:
             c = canvas.Canvas(self.pdf_path, pagesize=letter)
-            c.setFont("Helvetica", 12)
+            c.setFont("Courier", 11)
             lines = text_content.split('\n')
             y_position = letter[1] - inch
             for line in lines:
@@ -51,7 +53,8 @@ class PDFMerger:
 
     def merge_pdfs(self):
         pdf_files = [f for f in os.listdir(self.input_folder) if f.endswith(".pdf")]
-        pdf_files.sort()
+        pdf_files.sort(key=lambda x: int(x.split('_')[0]))
+        print(pdf_files)
 
         for pdf_file in pdf_files:
             pdf_path = os.path.join(self.input_folder, pdf_file)
@@ -67,13 +70,19 @@ class PDFMerger:
         print(f'Merged PDFs saved to: {self.output_file}')
 if __name__ == '__main__':
     # Example usage for PDFGenerator with C file and ContentReader
-    c_program_path = "C_programs/sample.c"
-    image_path = "temp/saxy.png"
+    # c_program_path = "/home/s4ms3pi0l/Documents/AssignEase/C_Programs/1_simple-compound.c"
+    # image_path = "/home/s4ms3pi0l/Documents/AssignEase/temp/1_simple-compound.jpg"
 
-    pdf_generator = PDFGenerator(
-        file_name="c_program_sample",
-        content_reader=ContentReader,
-        content_path=c_program_path,
-        image_path=image_path
+    # pdf_generator = PDFGenerator(
+    #     file_name="c_program_sample",
+    #     content_reader=ContentReader,
+    #     content_path=c_program_path,
+    #     text = "ohyeah",
+    #     image_path=image_path
+    # )
+    # pdf_generator.create_pdf()
+    merger = PDFMerger(
+        input_folder="pdf_files",
+        output_file="Assignment.pdf"
     )
-    pdf_generator.create_pdf()
+    merger.merge_pdfs()
