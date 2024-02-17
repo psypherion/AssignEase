@@ -48,7 +48,7 @@ pip install -r requirements.txt
 1. Adding Auto Comment Feature
 
 ## Project Updates :
-Visit here[https://github.com/users/ky13-troj/projects/5] to view the updates and on going tasks.
+Visit [here](https://github.com/users/ky13-troj/projects/5) to view the updates and on going tasks.
 ## Contributing
 
 We welcome contributions from the community! If you'd like to contribute to this project, please follow these guidelines:
