@@ -97,7 +97,7 @@ class PDFMerger:
         print(f'Merged PDFs saved to: {self.output_file}')
 
 if __name__ == '__main__':
-    Example usage for PDFGenerator with C file and ContentReader
+    # Example usage for PDFGenerator with C file and ContentReader
     c_program_path = "/home/s4ms3pi0l/Documents/AssignEase/C_Programs/1_simple-compound.c"
     image_path = "/home/s4ms3pi0l/Documents/AssignEase/temp/1_simple-compound.jpg"
 
