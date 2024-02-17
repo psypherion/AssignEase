@@ -43,7 +43,10 @@ pip install -r requirements.txt
 - PyPDF2
 - reportlab
 - platform
-
+  
+## Future Goals :
+1. Adding Auto Comment Feature
+   
 ## Contributing
 
 We welcome contributions from the community! If you'd like to contribute to this project, please follow these guidelines:
